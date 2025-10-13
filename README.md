@@ -44,13 +44,22 @@ The AI uses a sophisticated two-mode approach:
 
 ## Development Process
 
-This project was built using AI-assisted development tools (Windsurf/Claude) to gain hands-on experience with:
+This project was built using AI-assisted development tools to gain hands-on experience with:
 - Modern developer workflows
 - Debugging complex state management issues
 - React hooks and component lifecycle
 - Game logic and AI algorithms
 
-See [BUG_DOCUMENTATION.md](BUG_DOCUMENTATION.md) for detailed notes on 9+ bugs identified and resolved during development.
+### Initial Development (Windsurf/Claude)
+The game was initially developed with AI assistance, identifying and fixing 9 critical bugs related to state management, game logic, and UI interactions.
+
+### October 2025 Code Review (Devin)
+A comprehensive code review session identified and fixed 3 additional bugs:
+- **Bug #10**: Shallow copy mutation in AI targeting mode (High severity)
+- **Bug #11**: Silent AI ship placement failures (Medium severity)  
+- **Bug #12**: Unused direction field in state (Code quality)
+
+See [BUG_DOCUMENTATION.md](BUG_DOCUMENTATION.md) for detailed notes on all 12 bugs identified and resolved, including root causes, fixes applied, and prevention strategies.
 
 ## Running Locally
 
