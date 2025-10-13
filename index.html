@@ -61,7 +61,7 @@
           const [message, setMessage] = useState('Place your Carrier (5 spaces)');
           const [playerShipsRemaining, setPlayerShipsRemaining] = useState(5);
           const [aiShipsRemaining, setAiShipsRemaining] = useState(5);
-          const [aiTargetMode, setAiTargetMode] = useState({ active: false, hits: [], direction: null });
+          const [aiTargetMode, setAiTargetMode] = useState({ active: false, hits: [] });
 
           useEffect(() => {
             initializeBoards();
@@ -101,6 +101,10 @@
                   placed = true;
                 }
                 attempts++;
+              }
+              
+              if (!placed) {
+                console.warn(`Failed to place ${ship.name} after ${attempts} attempts`);
               }
             });
             
@@ -226,9 +230,10 @@
             
             if (hit) {
               const shipIndex = playerBoard[row][col];
-              const newTargetMode = { ...aiTargetMode };
-              newTargetMode.active = true;
-              newTargetMode.hits.push({ row, col });
+              const newTargetMode = {
+                active: true,
+                hits: [...aiTargetMode.hits, { row, col }]
+              };
               
               const shipHits = newAiShots.filter(shot => {
                 const [r, c] = shot.split(',').map(Number);
@@ -242,7 +247,6 @@
                 
                 newTargetMode.active = false;
                 newTargetMode.hits = [];
-                newTargetMode.direction = null;
                 
                 if (newPlayerShipsRemaining === 0) {
                   setGameState('lost');
@@ -329,7 +333,7 @@
             setMessage('Place your Carrier (5 spaces)');
             setPlayerShipsRemaining(5);
             setAiShipsRemaining(5);
-            setAiTargetMode({ active: false, hits: [], direction: null });
+            setAiTargetMode({ active: false, hits: [] });
             initializeBoards();
           };
 
