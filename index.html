@@ -73,7 +73,7 @@
 
           const initializeBoards = () => {
             const emptyBoard = createEmptyBoard();
-            setPlayerBoard(JSON.parse(JSON.stringify(emptyBoard)));
+            setPlayerBoard(emptyBoard.map(row => [...row]));
             
             const aiEmptyBoard = createEmptyBoard();
             const aiPlacedBoard = placeAiShips(aiEmptyBoard);
@@ -81,7 +81,7 @@
           };
 
           const placeAiShips = (board) => {
-            const newBoard = JSON.parse(JSON.stringify(board));
+            const newBoard = board.map(row => [...row]);
             
             SHIPS.forEach((ship, index) => {
               let placed = false;
@@ -134,7 +134,7 @@
             const ship = SHIPS[currentShipIndex];
             
             if (canPlaceShip(playerBoard, row, col, ship.size, shipOrientation)) {
-              const newBoard = JSON.parse(JSON.stringify(playerBoard));
+              const newBoard = playerBoard.map(row => [...row]);
               
               for (let i = 0; i < ship.size; i++) {
                 const r = shipOrientation === 'horizontal' ? row : row + i;
